@@ -1,2 +1,1 @@
-requires selenium. can be installed through pip
-requires a web driver https://chromedriver.chromium.org/downloads, can also be found on the chromium download portal
+selenium==4.8.0
