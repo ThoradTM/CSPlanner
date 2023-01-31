@@ -1,15 +1,40 @@
-import sys
+from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, QWidget
 
-from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
+from methods.webscraper import fetch_data
 
 
 class MainWindow(QMainWindow):
+
     def __init__(self):
         super().__init__()
 
         self.setMinimumSize(QSize(960, 540))
         self.setWindowTitle("CSPlanner")
-        button = QPushButton("Hello World!")
 
-        self.setCentralWidget(button)
+        self.label = QLabel()
+
+        self.username = QLineEdit()
+        self.username.setPlaceholderText("Username")
+        self.password = QLineEdit()
+        self.password.setPlaceholderText("Password")
+        self.password.setEchoMode(QLineEdit.EchoMode.Normal)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.username)
+        layout.addWidget(self.password)
+
+        button = QPushButton("Sign in")
+        button.setCheckable(True)
+        button.clicked.connect(self.onClicked)
+
+        layout.addWidget(button)
+
+        container = QWidget()
+        container.setLayout(layout)
+
+        self.setCentralWidget(container)
+
+    def onClicked(self):
+        text_info = fetch_data(self.username.text(), self.password.text())
+        print(text_info.text)
