@@ -18,7 +18,7 @@ class MainWindow(QMainWindow):
         self.username.setPlaceholderText("Username")
         self.password = QLineEdit()
         self.password.setPlaceholderText("Password")
-        self.password.setEchoMode(QLineEdit.EchoMode.Normal)
+        self.password.setEchoMode(QLineEdit.EchoMode.Password)
 
         layout = QVBoxLayout()
         layout.addWidget(self.username)
@@ -37,4 +37,4 @@ class MainWindow(QMainWindow):
 
     def onClicked(self):
         text_info = fetch_data(self.username.text(), self.password.text())
-        print(text_info.text)
+        print(text_info)
